@@ -23,6 +23,10 @@ npm run watch:js   # watch mode
 
 Deployment is automatic via GitHub Pages on push to `master`.
 
+**Local dev URL**: `http://localhost:4000/` — `baseurl` in `_config.yml` is empty (user site served at the domain root), so paths have no prefix.
+
+**`_config.yml` is NOT hot-reloaded** by `jekyll serve -l`. Changes to it require restarting the server.
+
 ## Architecture
 
 ### Content Collections
@@ -41,6 +45,8 @@ Content lives in collection directories as Markdown/HTML with YAML frontmatter:
 
 The homepage is `_pages/about.md` (permalink: `/`).
 
+**`_research/` uses `.html` files** (not `.md`) with raw HTML bodies — unlike other collections which use Markdown.
+
 ### Layout Hierarchy
 
 ```
@@ -58,11 +64,25 @@ _layouts/default.html          ← base wrapper
 - `_includes/author-profile.html` — sidebar bio and social links
 - `_sass/_variables.scss` — theme colors and spacing
 
+### Embedded HTML Components
+
+Some pages embed standalone HTML files using `<embed>` rather than Liquid includes:
+
+- `_pages/about.md` embeds `_pages/timeline.html` for the "Updates and News" timeline
+- `_pages/photography.html` embeds `_pages/photography_birds.html` for the photo gallery
+
+To add a new timeline entry, edit `_pages/timeline.html` directly — each entry is a `<li class="timeline-item">` inside `<ol class="timeline">`.
+
 ### Assets
 
 - Images go in `images/` (author avatar: `images/guna.png`, hero: `images/home.jpeg`)
 - Downloadable files (PDFs) go in `files/`
 - JS is in `assets/js/`; `_main.js` is the source, `main.min.js` is the built output
+- In Liquid/HTML templates, reference images as `{{ site.url }}{{ site.baseurl }}/images/filename.png`
+
+### CV Page
+
+`_pages/cv.md` still contains placeholder Academic Pages template content and has not been updated with real information yet.
 
 ### Markdown Generator
 
