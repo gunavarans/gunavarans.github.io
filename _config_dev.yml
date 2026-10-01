@@ -1,0 +1,7 @@
+# Local-development overrides. Layered on top of _config.yml:
+#   bundle exec jekyll serve -l -H localhost --config _config.yml,_config_dev.yml
+#
+# _includes/base_path builds every archive link as site.url + site.baseurl, so with
+# the production url in _config.yml those links point at gunavarans.github.io even
+# when you are browsing localhost. Overriding url here keeps local links local.
+url: "http://localhost:4000"

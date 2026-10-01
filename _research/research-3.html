@@ -1,102 +1,66 @@
 ---
-title: "Optimizing B+-Tree for Byte-Addressable Non-Volatile Memory"
-excerpt: "<img src='../images/nvm.png'>"
+title: "Optimizing K-mer Counting and Querying in Commodity Clusters"
+excerpt: "<img
+    src='../images/cluster.png'>"
 collection: research
 ---
 
-<p>In recent years, the next-generation non-volatile memory (NVM) technologies have emerged with
-    DRAM-like byte addressability and disk-like durability. Computer architects have proposed to
-    use them to build persistent memory that blurs the conventional boundary between volatile
-    memory and non-volatile storage. </p>
+<img src='{{ site.url }}{{ site.baseurl }}/images/cluster_2.png'>
+
+<br>
+
+<p>k-mer counting is the process of counting k length substrings in a sequence. It is an
+    important step in many bioinformatics applications including genome assembly, sequence error
+    correction, and sequence alignment. Even though generating k-mer histograms seems simple and
+    straightforward, processing large datasets efficiently with limited resources, especially
+    memory, is very challenging. As the advancements in next-generation sequencing technologies
+    have resulted in a tremendous growth of genomic data, it is inevitable for k-mer counters to
+    be faster and more efficient. A lot of work has been done in the past decade to optimize
+    k-mer counting.</p>
 
 <p>
-    I was involved in this research when I was a research intern at <a href="https://www.sutd.edu.sg/" target="_blank">
-        Singapore University of Technology and Design (SUTD) </a> where I was part of the <a
-        href="https://asset-group.github.io/" target="_blank">ASSET Research Group</a>. The goal of this research was to
-    optimize B+-trees for
-    persistent memory. We developed two variants of B+-trees namely <a
-        href="https://ieeexplore.ieee.org/abstract/document/9312478?casa_token=cEOjZYbeCecAAAAA:dZRLzlVWwI61TW9xX4KU3cCZKQEPTGfkZoIoxIkxochzW6BdivlX34yCTgS5h6qd726bdd_BvOHA"
-        target="_blank">Circ-Tree </a> and <a href="https://dl.acm.org/doi/10.1145/3396236"
-        target="_blank">Crab-Tree</a>.
+    The existing distributed memory solutions are specialized for high performance clusters and
+    high speed networks which are costly to implement. Hence, the focus of this research is to
+    build a k-mer counting and querying tool which is optimized for commodity clusters. We present Quill: a
+    memory-efficient
+    k-mer counting and a querying tool for commodity clusters. Quill manages to perform k-mer counting in a conventional
+    computer cluster without relying on high-performance network
+    interfaces or parallel file systems. Furthermore, Quill provides an
+    additional advantage in cases where k-mer counting is required for
+    multiple k-values in the same dataset.
 </p>
 
-<h3>
-    Circ-Tree
-</h3>
-<img src='{{ site.url }}{{ site.baseurl }}/images/nvm.png'>
 <p>
-    A conventional B+-tree node is a linear structure in which key-value (KV) pairs are maintained from the zero offset
-    of a node. These KV pairs are shifted in a unidirectional fashion for insertions and deletions. Inserting and
-    deleting one KV pair may inflict a large amount of write amplifications due to shifting existing KV pairs. This
-    badly impairs the performance of in-NVM B+-tree.
-</p>
-<p>
-    We propose a novel circular design for B+-tree.
-    With regard to NVM's byte-addressability, our Circ-Tree embraces tree nodes in a circular structure without a fixed
-    base address, and bidirectionally shifts KV pairs for insertions and deletions to minimize write amplifications. We
-    have implemented a prototype for Circ-Tree and conducted extensive experiments. Experimental results show that
-    Circ-Tree significantly outperforms two state-of-the-art in-NVM B+-tree variants, i.e., NV-tree and FAST+FAIR, by up
-    to 1.6× and 8.6×, respectively, in terms of write performance. The end-to-end comparison by running YCSB to KV
-    stores built on NV-tree, FAST+FAIR, and Circ-Tree reveals that Circ-Tree yields up to 29.3 and 47.4 percent higher
-    write performance, respectively, than NV-tree and FAST+FAIR.
+    Quill shows a linear scaling
+    for the k-mer counting stage when tested in a commodity cluster.
+    The performance gain is more evident when executed with k values
+    up to 22 and 28. Thus, Quill can be viewed as a cost-effective k-mer
+    counting solution that can effectively use the combined computing
+    power of a cluster of commodity-grade computers.
 </p>
 
-<h3>
-    Crab-Tree
-</h3>
-<img src='{{ site.url }}{{ site.baseurl }}/images/nvm_2.png'>
 <p>
-    ARM processors have incorporated architectural supports to utilize NVM. In this work, we consider tailoring the
-    important B+-tree for
-    NVM operated by a 64-bit ARMv8 processor. We first conduct an empirical study of performance overheads in writing
-    and reading data for a B+-tree with an ARMv8 processor, including the time cost of cache line flushes and memory
-    fences for crash consistency as well as the execution time of binary search compared to that of linear search. We
-    hence identify the key weaknesses in the design of B+-tree with ARMv8 architecture. Accordingly, we develop a new
-    B+-tree variant, namely, crash recoverable ARMv8-oriented B+-tree (Crab-tree). To insert and delete data at runtime,
-    Crab-tree selectively chooses one of two strategies, i.e., copy on write and shifting in place, depending on which
-    one causes less consistency cost to performance. Crab-tree regulates a strict execution order in both strategies and
-    recovers the tree structure in case of crashes. We have evaluated Crab-tree in Raspberry Pi 3 Model B+ with emulated
-    NVM. Experiments show that Crab-tree significantly outperforms state-of-the-art B+-trees designed for persistent
-    memory by up to 2.6x and 3.2x in write and read performances, respectively, with both consistency and scalability
-    achieved.
-</p>
+    Quill is freely available at <a href="https://github.com/CSE-Optimizers/k-mer_counter"
+        target="_blank">https://github.com/CSE-Optimizers/k-mer_counter
+    </a>.
 
+</p>
 
 <h3 style="color: chocolate">
-    Publications
+Publications
 </h3>
 
-<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b"></div>
-<ol>
-    <li>
-        Wang, C., <b>Brihadiswaran, G.</b>, Jiang, X., & Chattopadhyay, S. (2021).
-        Circ-Tree: A B+-Tree Variant with Circular Design for Persistent Memory. <i>IEEE Transactions on
-            Computers</i>.
+<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b">
+    <ol>
+        Edippuliarachchi, B., Gamlath, D., Amaratunga, R., <b>Brihadiswaran, G.</b>, &
+        Jayasena, S. (2022). Quill: A Memory Efficient k-mer Counting and k-mer
+        Querying Tool for Commodity Clusters. In <i>Proceedings of the 14th
+            International Conference on Bioinformatics and Biomedical Technology (ICBBT ’22)</i> (pp.
+        79-88).
         <span class="icon">
-            <a href="https://ieeexplore.ieee.org/abstract/document/9312478" target="_blank">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
-            </a>
-        </span>
-    </li>
-    <li>
-        Wang, C., Chattopadhyay, S., & <b>Brihadiswaran, G.</b> (2020). Crab-tree: A Crash
-        Recoverable B+-tree Variant for Persistent Memory with ARMv8 Architecture. <i>ACM
-            Transactions on Embedded Computing Systems (TECS)</i>.
-        <span class="icon">
-            <a href="https://dl.acm.org/doi/10.1145/3396236" target="_blank">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
-            </a>
-        </span>
-    </li>
-    <li>
-        Wang, C., Chattopadhyay, S., & <b>Brihadiswaran, G. </b>(2019). Crash
-        recoverable ARMv8-oriented B+-tree for byte-addressable persistent memory. In
-        <i>Proceedings of the 20th ACM SIGPLAN/SIGBED International Conference on Languages,
-            Compilers, and Tools for Embedded Systems </i>(pp. 33-44).
-        <span class="icon">
-            <a href="https://dl.acm.org/doi/10.1145/3316482.3326358" target="_blank">
+            <a href="https://dl.acm.org/doi/abs/10.1145/3543377.3543389" target="_blank">
                 <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Conference Paper Icon">
             </a>
         </span>
-    </li>
-    </div>
+    </ol>
+</div>

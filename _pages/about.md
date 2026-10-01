@@ -9,7 +9,7 @@ redirect_from:
 
 ![Image Description](images/home.jpeg)
 
-I am a Computer Engineering 👨‍🎓 Ph.D. student at <a href="https://www.ncsu.edu/" target="_blank" style="text-decoration:none"> NC State</a>, working with <a href="https://ece.ncsu.edu/people/jtuck/" target="_blank" style="text-decoration:none">Dr. James Tuck</a>.  I enjoy interdisciplinary research and often work at the crossroads of computer systems, applied machine learning, and biology. My current research explores the fascinating potential of 🧬 DNA-based data storage. In particular, I focus on leveraging high-performance computing, machine learning, and parallel programming to design scalable, efficient storage systems that push the boundaries of what DNA can achieve as a medium for data storage.
+I am a final-year 👨‍🎓 Ph.D. candidate in Computer Engineering at <a href="https://www.ncsu.edu/" target="_blank" style="text-decoration:none"> NC State</a>, working with <a href="https://ece.ncsu.edu/people/jtuck/" target="_blank" style="text-decoration:none">Prof. James Tuck</a>, and I expect to defend my dissertation in May 2027.  I enjoy leveraging machine learning and high-performance computing (HPC) to solve complex interdisciplinary problems. Broadly, I am interested in building faster scientific software exploiting parallelism across CPUs, GPUs, and distributed systems. My recent research applies deep learning and HPC techniques to 🧬 DNA-based data storage, specifically modeling weak-affinity DNA–DNA interactions.
 
 I completed both my Master’s and Bachelor’s degrees at the <a href="https://uom.lk/" target="_blank" style="text-decoration:none"> University of Moratuwa</a>. I also had the opportunity to work as a research intern at the Singapore University of Technology and Design, where I was part of the <a href="https://asset-group.github.io/" target="_blank" style="text-decoration:none"> ASSET Research Group</a>, optimizing data structures for byte-addressable non-volatile memory.
 
@@ -58,9 +58,17 @@ I have engaged in collaborative research with teams from:
 <br>
 
 # Mentored Students
-I have had the privilege of mentoring several talented students throughout their academic journeys. Below is a list of students I’ve mentored, along with their degree pursued, year of mentorship, and their next/current positions:
+I have had the privilege of mentoring several talented students throughout their academic journeys. Below is a list of students I’ve mentored, along with their degree pursued, institution, year of mentorship, the project they worked on, and their next/current positions:
 
-- Alan An, High school senior (2024/25)
-- Budvin Edippuliarachchi, Undergraduate (2021/22), Graduate Student at University of Utah
-- Damika Gamlath, Undergraduate (2021/22), Software Engineer at Google
-- Ruchin Amaratunga, Undergraduate (2021/22), R&D Engineer at Synopsys Sri Lanka
+- Michael Cruzat, High school student, North Carolina School of Science and Mathematics (2026/27) — visualization of a processor simulator
+- Preston Scott, Undergraduate, NC State University (Summer 2026) — training a neural network for weak-affinity DNA-DNA binding prediction, through the ASCEND Research Experience for Undergraduates (REU) program; co-mentored with Prof. James Tuck
+- Hatheem Rafeek, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Kusal Pabasara, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Lahiru Dilshan, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Tharupahan Jayawardana, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Dehan Wijesinghe, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Nimesh Kulatunga, Undergraduate, University of Moratuwa, Sri Lanka (2025) — components of a tool for fast DNA sequencing data processing
+- Alan An, High school senior, North Carolina School of Science and Mathematics (2024/25) — simulation-based benchmarking of error-correction coding for DNA data storage using the FrameD simulator
+- Budvin Edippuliarachchi, Undergraduate, University of Moratuwa, Sri Lanka (2021/22) — an MPI-based distributed k-mer counting and querying tool for commodity clusters. Now Graduate Student at University of Utah
+- Damika Gamlath, Undergraduate, University of Moratuwa, Sri Lanka (2021/22) — an MPI-based distributed k-mer counting and querying tool for commodity clusters. Now Software Engineer at Google
+- Ruchin Amaratunga, Undergraduate, University of Moratuwa, Sri Lanka (2021/22) — an MPI-based distributed k-mer counting and querying tool for commodity clusters. Now R&D Engineer at Synopsys Sri Lanka

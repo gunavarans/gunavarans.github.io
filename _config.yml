@@ -14,7 +14,7 @@ name                     : &name "Gunavaran Brihadiswaran"
 description              : &description "personal description"
 url                      : "https://gunavarans.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"; empty for a user site served at the domain root
-# repository               : "gunavarans/gunavaran-brihadiswaran.github.io"
+repository               : "gunavarans/gunavarans.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -24,7 +24,7 @@ author:
   avatar           : "guna.png"
   name             : "Gunavaran Brihadiswaran"
   pronouns         : # example: "she/her"  
-  bio              : "Computer Engineering Ph.D. Student"
+  bio              : "Ph.D. Candidate in Computer Engineering"
   location         : "North Carolina, USA"
   employer         : "NC State University"
   uri              : # URL

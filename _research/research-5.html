@@ -1,0 +1,85 @@
+---
+title: "Autism Spectrum Disorder Indicative Decision Support System using Psychophysiological Data"
+excerpt: "<img src='../images/asd.png'>"
+collection: research
+---
+
+<img src='{{ site.url }}{{ site.baseurl }}/images/asd_methodology.png'>
+
+<p>Autism Spectrum Disorder (ASD) is a neurodevelopmental disorder which affects social
+    interaction, communication, and leads to restricted and repetitive behavior. The phenotypic
+    heterogeneity of ASD makes timely and accurate diagnosis challenging, requiring highly
+    trained clinical practitioners. The development of automated approaches to ASD
+    classification, based on integrated psychophysiological measures, may one day help expedite
+    the diagnostic process.</p>
+
+<p>The main objective of this research is to design and develop a machine learning based
+    decision support system to classify ASD using Electroencephalography (EEG) and facial
+    thermographic data indicating the severity range of the disorder. The research was carried
+    out in multiple phases.</p>
+
+<p> In phase one, the possibilities to use the minimum number of EEG channels were explored
+    using statistical features extracted from noise filtered EEG data before and after Discrete
+    Wavelet Transform and several learning models. Using Random Forest and Correlation-based
+    Feature Selection, an accuracy level of 93% was achieved.</p>
+
+<p>
+    In the second phase, as an extension to phase one, the possibility of improving the
+    classification with facial thermographic data was evaluated. The methodology used in this
+    phase extracts a variety of feature sets and evaluates the possibility of using several
+    learning models. Mean, standard deviation, and entropy values of the EEG signals and mean
+    temperature values of regions of interest (ROIs) in facial thermograms were extracted as
+    features. The integration of EEG and thermographic features achieved an accuracy of 94% with
+    both Logistic Regression and Multi-Layer Perceptron classifiers.
+</p>
+
+<p>
+    In the third phase, a multi-class classification was employed to identify the severity level
+    of ASD.
+</p>
+
+<p>
+    Finally, a web-based decision support system named "ASDGenus" for ASD classification was
+    developed based on the third phase.
+</p>
+
+
+<h3 style="color: chocolate">
+    Publications
+</h3>
+
+<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b">
+    <ol>
+        <li>
+            Haputhanthri, D., <b>Brihadiswaran, G.</b>, Gunathilaka, S., Meedeniya, D.,
+            Jayarathna, S., Jaime, M., & Harshaw, C. (2020). Integration of Facial
+            Thermography in EEG-based Classification of ASD. <i>International Journal of
+                Automation and Computing</i>, 17, 1-18.
+            <span class="icon">
+                <a href="https://link.springer.com/article/10.1007/s11633-020-1231-6" target="_blank">
+                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
+                </a>
+            </span>
+        </li>
+        <li>
+            <b>Brihadiswaran, G.</b>, Haputhanthri, D., Gunathilaka, S., Meedeniya, D., &
+            Jayarathna, S. (2019). EEG-based processing and classification methodologies for
+            Autism Spectrum Disorder: A Review.<i> Journal of Computer Science </i>, 15(8).
+            <span class="icon">
+                <a href="https://thescipub.com/abstract/10.3844/jcssp.2019.1161.1183" target="_blank">
+                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
+                </a>
+            </span>
+        </li>
+        <li>
+            Haputhanthri, D., <b>Brihadiswaran, G.</b>, Gunathilaka, S., Meedeniya, D.,
+            Jayawardena, Y., Jayarathna, S., & Jaime, M. (2019). An EEG based channel
+            optimized classification approach for autism spectrum disorder. In <i>2019
+                Moratuwa Engineering Research Conference (MERCon)</i> (pp. 123-128).
+            <span class="icon">
+                <a href="https://ieeexplore.ieee.org/abstract/document/8818814" target="_blank">
+                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Conference Paper Icon">
+                </a>
+            </span>
+        </li>
+</div>

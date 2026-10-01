@@ -1,59 +1,71 @@
 ---
-title: "Accelerating K-mer Counting for Genomic Analysis in a Shared Memory Environment"
-excerpt: "<img src='../images/kmer_counting.png'>"
+title: "BINND: Deep Learning Predicts Dissimilar DNA-DNA Binding and Engineers Hyperconnected Networks"
+excerpt: "<img
+    src='../images/htp_1.png'> <img src='../images/htp.png'>"
 collection: research
 ---
-
-<img src='{{ site.url }}{{ site.baseurl }}/images/processing_pipeline.png'>
-
-<br>
-<p>k-mer counting is the process of counting k length substrings in a sequence. It is an
-    important step in many bioinformatics applications including genome assembly, sequence error
-    correction, and sequence alignment. Even though generating k-mer histograms seems simple and
-    straightforward, processing large datasets efficiently with limited resources, especially
-    memory, is very challenging. As the advancements in next-generation sequencing technologies
-    have resulted in a tremendous growth of genomic data, it is inevitable for k-mer counters to
-    be faster and more efficient. A lot of work has been done in the past decade to optimize
-    k-mer counting.</p>
-
-<p>We have developed "Frigate", a fast and efficient tool capable of counting and
-    querying k-mers is presented. Its in-memory design utilizes multithreaded, lock-free data
-    structures to improve performance.
-    Thread synchronization is handled using the compare-and-swap technique. The parallel
-    processing pipeline of Frigate is the result of careful performance engineering and design.
-    Frigate was developed with the emphasis on values of k less than 20, aiming to maximize
-    performance by employing different algorithms for different ranges of k values.</p>
-
-<p>Frigate is written in C and freely available at
-    <a href="https://github.com/Gunavaran/frigate" target="_blank">https://github.com/Gunavaran/frigate
-    </a>
-    under MIT license.
-</p>
-
+<img src='{{ site.url }}{{ site.baseurl }}/images/htp.png'>
 <p>
-    The performance of Frigate was compared with six state-of-the-art k-mer counters: Jellyfish,
-    DSK, Gerbil, CHTKC, KMC2, and KMC3, using two real-world datasets. The experiments were
-    carried out for k values of 10, 15, and 17 using a different number of threads in the range
-    [1, 32]. The results show that Frigate achieves a comparable performance or up to 2-3x
-    speedup compared to its competitors, especially for large datasets. The k-mer counters were
-    analyzed based on the running time, amount of memory used, and scalability. The correctness
-    of Frigate was evaluated by comparing the k-mer frequency histogram with those of other
-    k-mer counters.
+<em>Disclaimer: the text on this page was written with the help of AI, based on our
+published paper.</em>
 </p>
-
-<h3 style="color: chocolate">
-    Publications
-</h3>
-
-<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b">
-    <ol>
-        <b>Brihadiswaran, G. </b> and Jayasena, S. (2021). Frigate: a
-        fast, in-memory tool for counting and querying k-mers. In <i>Proceedings of the 13th International
-            Conference on Bioinformatics and Biomedical Technology (ICBBT ’21) </i>.
-        <span class="icon">
-            <a href="https://dl.acm.org/doi/abs/10.1145/3473258.3473279" target="_blank">
-                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Conference Paper Icon">
-            </a>
-        </span>
-    </ol>
-</div>
+<p>
+<strong>Published in <i>Nature Communications</i> (2026).</strong>
+<a href="https://www.nature.com/articles/s41467-026-75395-w" target="_blank">Read the paper</a>
+</p>
+<p>
+Bioengineering has largely been built on orthogonality: the assumption that molecular
+components should interact with exactly one intended partner, and that weak or
+non-specific interactions are defects to be designed away. That assumption is convenient,
+but it is also expensive. It confines designs to a small, well-behaved corner of the
+possible sequence space, caps how far a system can scale, and offers little help when a
+synthetic system has to operate inside a natural background of high sequence diversity.
+Many native systems, from chromatin regulation to cellular signaling, do the opposite:
+they use messy, multivalent networks in which each component touches several others.
+</p>
+<p>
+DNA-DNA interactions are a good testbed for this idea. Predicting whether two highly
+similar strands will bind is straightforward, which is why DNA is often described as
+programmable. The unsolved part is off-target binding among dissimilar sequences, which is
+precisely what matters in a genome or a large DNA data storage database. Conventional
+predictors - Levenshtein and Hamming distance, GC content and melting temperature, and
+thermodynamic tools such as NUPACK and Primer3 - work well near perfect complementarity
+and then degrade sharply. Worse, they fail most severely in the region where the bulk of
+the sequence space actually lives, leaving bound and unbound populations heavily
+overlapped rather than cleanly separated.
+</p>
+<p>
+We developed <strong>BINND</strong> (Binding and Interaction Neural Network for DNA), a
+convolutional neural network trained on experimental rather than simulated data. The
+training set came from an ultra-high-throughput pulldown assay run across 26 bait
+sequences, yielding roughly 144.6 million unique sequence pairs with balanced bound and
+unbound classes. The data are extremely sparse - about 92% of unique sequences appear
+exactly once - which shaped how the model had to be labeled and trained. Training and
+benchmarking were carried out on a high-performance computing cluster.
+</p>
+<p>
+BINND reaches accuracies above 80% with an AUC of 0.88, generalizes across diverse
+sequences, and outperforms Levenshtein distance, NUPACK, and Primer3 by at least 10
+percentage points in classification accuracy on an identical test set. It is also far
+cheaper to run, at roughly 54x the speed of NUPACK and 7x that of Primer3. A reduced
+variant, BINND-Lite, trains 2.2x faster on a GPU and runs inference 10x faster on a CPU
+for a small accuracy cost. One control is worth highlighting: the same architecture trained
+on randomly generated sequence pairs instead of experimental ones lands at 50% accuracy,
+i.e. chance. The model is not recovering complementarity rules in the abstract; it is
+learning what the wet lab actually measured.
+</p>
+<p>
+To show that this supports design and not only prediction, we built a searchable DNA
+network encoding fictitious children's storybook characters. Each of the 26 bait sequences
+stands for an abstract attribute, and characters are represented by prey sequences that
+deliberately bind several baits at once. Querying an attribute retrieves every character
+that has it. The network is hyperconnected on purpose: it works because of the
+overlapping, non-orthogonal interactions that conventional design rules would have
+eliminated.
+</p>
+<p>
+This was joint work with Karishma Matange, with whom I share first authorship, together
+with Kyle J. Tomek, Kevin Volkel, Doug Townsend, and our advisors Prof. James Tuck and
+Prof. Albert Keung. I led the computational side: the model, the data pipelines, and the
+HPC workflows.
+</p>

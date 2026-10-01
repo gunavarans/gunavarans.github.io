@@ -1,46 +1,64 @@
 ---
-title: "Autism Spectrum Disorder Indicative Decision Support System using Psychophysiological Data"
-excerpt: "<img src='../images/asd.png'>"
+title: "Optimizing B+-Tree for Byte-Addressable Non-Volatile Memory"
+excerpt: "<img src='../images/nvm.png'>"
 collection: research
 ---
 
-<img src='{{ site.url }}{{ site.baseurl }}/images/asd_methodology.png'>
-
-<p>Autism Spectrum Disorder (ASD) is a neurodevelopmental disorder which affects social
-    interaction, communication, and leads to restricted and repetitive behavior. The phenotypic
-    heterogeneity of ASD makes timely and accurate diagnosis challenging, requiring highly
-    trained clinical practitioners. The development of automated approaches to ASD
-    classification, based on integrated psychophysiological measures, may one day help expedite
-    the diagnostic process.</p>
-
-<p>The main objective of this research is to design and develop a machine learning based
-    decision support system to classify ASD using Electroencephalography (EEG) and facial
-    thermographic data indicating the severity range of the disorder. The research was carried
-    out in multiple phases.</p>
-
-<p> In phase one, the possibilities to use the minimum number of EEG channels were explored
-    using statistical features extracted from noise filtered EEG data before and after Discrete
-    Wavelet Transform and several learning models. Using Random Forest and Correlation-based
-    Feature Selection, an accuracy level of 93% was achieved.</p>
+<p>In recent years, the next-generation non-volatile memory (NVM) technologies have emerged with
+    DRAM-like byte addressability and disk-like durability. Computer architects have proposed to
+    use them to build persistent memory that blurs the conventional boundary between volatile
+    memory and non-volatile storage. </p>
 
 <p>
-    In the second phase, as an extension to phase one, the possibility of improving the
-    classification with facial thermographic data was evaluated. The methodology used in this
-    phase extracts a variety of feature sets and evaluates the possibility of using several
-    learning models. Mean, standard deviation, and entropy values of the EEG signals and mean
-    temperature values of regions of interest (ROIs) in facial thermograms were extracted as
-    features. The integration of EEG and thermographic features achieved an accuracy of 94% with
-    both Logistic Regression and Multi-Layer Perceptron classifiers.
+    I was involved in this research when I was a research intern at <a href="https://www.sutd.edu.sg/" target="_blank">
+        Singapore University of Technology and Design (SUTD) </a> where I was part of the <a
+        href="https://asset-group.github.io/" target="_blank">ASSET Research Group</a>. The goal of this research was to
+    optimize B+-trees for
+    persistent memory. We developed two variants of B+-trees namely <a
+        href="https://ieeexplore.ieee.org/abstract/document/9312478?casa_token=cEOjZYbeCecAAAAA:dZRLzlVWwI61TW9xX4KU3cCZKQEPTGfkZoIoxIkxochzW6BdivlX34yCTgS5h6qd726bdd_BvOHA"
+        target="_blank">Circ-Tree </a> and <a href="https://dl.acm.org/doi/10.1145/3396236"
+        target="_blank">Crab-Tree</a>.
 </p>
 
+<h3>
+    Circ-Tree
+</h3>
+<img src='{{ site.url }}{{ site.baseurl }}/images/nvm.png'>
 <p>
-    In the third phase, a multi-class classification was employed to identify the severity level
-    of ASD.
+    A conventional B+-tree node is a linear structure in which key-value (KV) pairs are maintained from the zero offset
+    of a node. These KV pairs are shifted in a unidirectional fashion for insertions and deletions. Inserting and
+    deleting one KV pair may inflict a large amount of write amplifications due to shifting existing KV pairs. This
+    badly impairs the performance of in-NVM B+-tree.
+</p>
+<p>
+    We propose a novel circular design for B+-tree.
+    With regard to NVM's byte-addressability, our Circ-Tree embraces tree nodes in a circular structure without a fixed
+    base address, and bidirectionally shifts KV pairs for insertions and deletions to minimize write amplifications. We
+    have implemented a prototype for Circ-Tree and conducted extensive experiments. Experimental results show that
+    Circ-Tree significantly outperforms two state-of-the-art in-NVM B+-tree variants, i.e., NV-tree and FAST+FAIR, by up
+    to 1.6× and 8.6×, respectively, in terms of write performance. The end-to-end comparison by running YCSB to KV
+    stores built on NV-tree, FAST+FAIR, and Circ-Tree reveals that Circ-Tree yields up to 29.3 and 47.4 percent higher
+    write performance, respectively, than NV-tree and FAST+FAIR.
 </p>
 
+<h3>
+    Crab-Tree
+</h3>
+<img src='{{ site.url }}{{ site.baseurl }}/images/nvm_2.png'>
 <p>
-    Finally, a web-based decision support system named "ASDGenus" for ASD classification was
-    developed based on the third phase.
+    ARM processors have incorporated architectural supports to utilize NVM. In this work, we consider tailoring the
+    important B+-tree for
+    NVM operated by a 64-bit ARMv8 processor. We first conduct an empirical study of performance overheads in writing
+    and reading data for a B+-tree with an ARMv8 processor, including the time cost of cache line flushes and memory
+    fences for crash consistency as well as the execution time of binary search compared to that of linear search. We
+    hence identify the key weaknesses in the design of B+-tree with ARMv8 architecture. Accordingly, we develop a new
+    B+-tree variant, namely, crash recoverable ARMv8-oriented B+-tree (Crab-tree). To insert and delete data at runtime,
+    Crab-tree selectively chooses one of two strategies, i.e., copy on write and shifting in place, depending on which
+    one causes less consistency cost to performance. Crab-tree regulates a strict execution order in both strategies and
+    recovers the tree structure in case of crashes. We have evaluated Crab-tree in Raspberry Pi 3 Model B+ with emulated
+    NVM. Experiments show that Crab-tree significantly outperforms state-of-the-art B+-trees designed for persistent
+    memory by up to 2.6x and 3.2x in write and read performances, respectively, with both consistency and scalability
+    achieved.
 </p>
 
 
@@ -48,38 +66,37 @@ collection: research
     Publications
 </h3>
 
-<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b">
-    <ol>
-        <li>
-            Haputhanthri, D., <b>Brihadiswaran, G.</b>, Gunathilaka, S., Meedeniya, D.,
-            Jayarathna, S., Jaime, M., & Harshaw, C. (2020). Integration of Facial
-            Thermography in EEG-based Classification of ASD. <i>International Journal of
-                Automation and Computing</i>, 17, 1-18.
-            <span class="icon">
-                <a href="https://link.springer.com/article/10.1007/s11633-020-1231-6" target="_blank">
-                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
-                </a>
-            </span>
-        </li>
-        <li>
-            <b>Brihadiswaran, G.</b>, Haputhanthri, D., Gunathilaka, S., Meedeniya, D., &
-            Jayarathna, S. (2019). EEG-based processing and classification methodologies for
-            Autism Spectrum Disorder: A Review.<i> Journal of Computer Science </i>, 15(8).
-            <span class="icon">
-                <a href="https://thescipub.com/abstract/10.3844/jcssp.2019.1161.1183" target="_blank">
-                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
-                </a>
-            </span>
-        </li>
-        <li>
-            Haputhanthri, D., <b>Brihadiswaran, G.</b>, Gunathilaka, S., Meedeniya, D.,
-            Jayawardena, Y., Jayarathna, S., & Jaime, M. (2019). An EEG based channel
-            optimized classification approach for autism spectrum disorder. In <i>2019
-                Moratuwa Engineering Research Conference (MERCon)</i> (pp. 123-128).
-            <span class="icon">
-                <a href="https://ieeexplore.ieee.org/abstract/document/8818814" target="_blank">
-                    <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Conference Paper Icon">
-                </a>
-            </span>
-        </li>
-</div>
+<div class="desc" style="font-family: Arial; font-size: large; color: #0b0b0b"></div>
+<ol>
+    <li>
+        Wang, C., <b>Brihadiswaran, G.</b>, Jiang, X., & Chattopadhyay, S. (2021).
+        Circ-Tree: A B+-Tree Variant with Circular Design for Persistent Memory. <i>IEEE Transactions on
+            Computers</i>.
+        <span class="icon">
+            <a href="https://ieeexplore.ieee.org/abstract/document/9312478" target="_blank">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
+            </a>
+        </span>
+    </li>
+    <li>
+        Wang, C., Chattopadhyay, S., & <b>Brihadiswaran, G.</b> (2020). Crab-tree: A Crash
+        Recoverable B+-tree Variant for Persistent Memory with ARMv8 Architecture. <i>ACM
+            Transactions on Embedded Computing Systems (TECS)</i>.
+        <span class="icon">
+            <a href="https://dl.acm.org/doi/10.1145/3396236" target="_blank">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Journal Paper Icon">
+            </a>
+        </span>
+    </li>
+    <li>
+        Wang, C., Chattopadhyay, S., & <b>Brihadiswaran, G. </b>(2019). Crash
+        recoverable ARMv8-oriented B+-tree for byte-addressable persistent memory. In
+        <i>Proceedings of the 20th ACM SIGPLAN/SIGBED International Conference on Languages,
+            Compilers, and Tools for Embedded Systems </i>(pp. 33-44).
+        <span class="icon">
+            <a href="https://dl.acm.org/doi/10.1145/3316482.3326358" target="_blank">
+                <img src="{{ site.url }}{{ site.baseurl }}/images/pub_icon.jpg" alt="Conference Paper Icon">
+            </a>
+        </span>
+    </li>
+    </div>
